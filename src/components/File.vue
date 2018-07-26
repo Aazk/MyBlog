@@ -6,7 +6,8 @@
       <h2>{{o[0].year}}年{{o[0].month>10?o[0].month:'0'+o[0].month}}月</h2>
       <ul>
         <li v-for="(n,j) in o" :key="j">
-          <router-link  :to="'/article/'+n.a_id">{{n.title}}</router-link>
+          <router-link  :to="'/article/'+n.a_id" v-if="!flag">{{n.title}}</router-link>
+          <router-link  :to="'/edit/'+n.a_id" v-else>{{n.title}}</router-link>
           <time>{{n.createDate.substring(0,10)}}</time>
         </li>
       </ul>
@@ -23,12 +24,12 @@ export default {
       data: ''
     }
   },
-  beforeCreate() {
+  created() {
+      this.flag = this.$store.state.login.isLogin
       this.$http.get('api/getFile' + new Date().getTime(),{ params:{b_user:'000'}})
       .then((res) => {
         if(res.data.length>0){
           this.data = res.data
-          this.flag = true
         }
       })
   },

@@ -8,11 +8,13 @@
 export default {
   name: 'app',
   mounted() {
+    document.title="EC的博客"
     if (this.isMobile()) {
       this.$router.replace('/home_m');
-    } else {
-      this.$router.replace('/');
     }
+    // else {
+    //   this.$router.replace('/');
+    // }
   },
   methods: {
     isMobile() {

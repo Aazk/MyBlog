@@ -13,6 +13,7 @@ import ArticleList_m from '@/components/mobile/ArticleList_m'
 import Article_m from '@/components/mobile/Article_m'
 import File_m from '@/components/mobile/File_m'
 import Tag_m from '@/components/mobile/Tag_m'
+import Admin from '@/components/Admin'
 
 Vue.use(Router)
 
@@ -21,26 +22,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home'
-    },
-    {
-      path: '*',
-      redirect: '/home'
-    },
-    {
-      path: '/admin',
-      name: 'Login',
-      component: Login
-    },
-    {
-      path: '/home',
       name: 'Index',
       component: Index,
-      redirect: '/articleList',
       children: [
         {
           path: '/articleList',
           name: 'ArticleList',
+          alias: '/',
           component: ArticleList
         },
         {
@@ -55,7 +43,7 @@ export default new Router({
         },
         {
           path: '/tag/:c_id',
-          name: 'ArticleList',
+          name: 'tagArticleList',
           component: ArticleList
         },
         {
@@ -63,22 +51,17 @@ export default new Router({
           name: 'Article',
           component: Article
         },
-        {
-          path: '/create',
-          name: 'Create',
-          component: Create
-        },
       ]
     },
     {
       path: '/home_m',
       name: 'Index_m',
       component: Index_m,
-      redirect: '/articleList_m',
       children: [
         {
           path: '/articleList_m',
           name: 'ArticleList_m',
+          alias: '/home_m',
           component: ArticleList_m
         },
         {
@@ -93,7 +76,7 @@ export default new Router({
         },
         {
           path: '/tag_m/:c_id',
-          name: 'ArticleList_m',
+          name: 'tagArticleList_m',
           component: ArticleList_m
         },
         {
@@ -101,6 +84,44 @@ export default new Router({
           name: 'Article_m',
           component: Article_m
         }
+      ]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: Admin,
+      children:[
+        {
+          path: 'create',
+          name: 'Create',
+          component: Create
+        },
+        {
+          path: 'file',
+          name: 'File',
+          alias: '/admin',
+          component: File
+        },
+        {
+          path: 'tag',
+          name: 'Tag',
+          component: Tag
+        },
+        {
+          path: 'tag/:c_id',
+          name: 'tagArticleList',
+          component: ArticleList
+        },
+        {
+          path: '/edit/:a_id',
+          name: 'Edit',
+          component: Create
+        },
       ]
     }
   ]

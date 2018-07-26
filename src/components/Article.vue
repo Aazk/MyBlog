@@ -6,7 +6,7 @@
       <div class="uptime">{{new Date(+new Date(article.createDate)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'')}}</div>
       <p class="theme">{{article.theme}}</p>
       <div class="uptime">{{article.updateDate?"上次编辑于"+new Date(+new Date(article.updateDate)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,''):null}}</div>
-      <div class="markdown-body" v-html="article.content"></div>
+      <div class="markdown-body" v-html="article.html"></div>
     </article>
   </div>
 </template>

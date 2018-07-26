@@ -45,11 +45,8 @@
               this.$message('密码错误！')
               this.loading = false
             } else if (res.data.flag === true) {
-              if(res.data.role == 1){
-                this.$store.dispatch('beAdmin')
-              }
               this.$store.dispatch('login')
-              this.$router.push('/home')
+              this.$router.push('/admin')
             }
           })
         } else {
@@ -67,10 +64,14 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .loginContent{
-    margin: 200px auto;
+    margin: 100px auto;
   }
   .box-card {
     width: 400px;
     margin: 0 auto;
   }
 </style>
+
+
+
+

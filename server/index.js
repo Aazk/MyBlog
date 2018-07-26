@@ -3,7 +3,6 @@ const bodyParser = require('body-parser') // post 数据是需要
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const history = require('connect-history-api-fallback');
 const allowCrossDomain = function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -12,12 +11,6 @@ const allowCrossDomain = function(req, res, next) {
   next();
 };
 app.use(allowCrossDomain)
-app.use(history({
-  rewrites:[{
-    from: '/articleList', // 正则或者字符串
-    to: '/'}
-  ]
-}))
 app.use(bodyParser.json())
 // 设置跨域
 //app.use(cors())

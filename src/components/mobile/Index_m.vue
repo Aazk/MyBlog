@@ -32,7 +32,7 @@
         </el-collapse-transition>
       </el-main>
       <el-footer>
-        © 2018 - Edward.Che的博客    -  <a href="https://gitee.com/Aazk/blog">博客源码</a>
+        © 2018 - Edward.Che的博客    -  <a href="https://github.com/Aazk/MyBlog">博客源码</a>
         <br>
         Powered by  Vue2  &  Express & MySql
       </el-footer>

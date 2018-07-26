@@ -6,12 +6,12 @@
           <router-view></router-view>
         </el-collapse-transition>
         <el-footer>
-          © 2018 - Edward.Che的博客    -  <a href="https://gitee.com/Aazk/blog">博客源码</a>
+          © 2018 - Edward.Che的博客    -  <a href="https://github.com/Aazk/MyBlog">博客源码</a>
           <br>
           Powered by  Vue2  &  Express & MySql
         </el-footer>
       </el-main>
-      <el-aside width="300px" height="100%">
+      <el-aside height="100%">
         <el-menu
             default-active="1"
             class="el-menu-vertical-demo"
@@ -52,12 +52,13 @@ export default {
   data() {
     return {
       msg: "Welcome",
-      inpContent: ""
+      inpContent: "",
+      isAdmin: false
     };
   },
   beforeMount() {
-    if (!this.$store.state.login.isLogin) {
-      //this.$router.push("/login");
+    if (this.$store.state.login.isLogin) {
+      this.isAdmin = true
     }
   },
   methods: {
@@ -98,6 +99,9 @@ export default {
 .indexContent {
   height: 100%;
   width: 100%;
+}
+.el-aside {
+  width: 20%;
 }
 .el-menu {
   height: 100%;

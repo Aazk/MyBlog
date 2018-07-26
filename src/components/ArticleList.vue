@@ -3,10 +3,12 @@
     <h1 v-if="show">标签&nbsp;<a href="javascript:void(0)">{{tag}}</a>&nbsp;下的文章</h1>
     <ul v-if="flag">
       <li v-for="a in articleList" class="item" :key="a.a_id">
-        <router-link :to="'/article/'+a.a_id"><h2 class="title">{{a.title}}</h2></router-link>
+        <router-link :to="'/article/'+a.a_id" v-if="!isLogin"><h2 class="title">{{a.title}}</h2></router-link>
+        <router-link :to="'/edit/'+a.a_id" v-else><h2 class="title">{{a.title}}</h2></router-link>
         <div class="creaT">{{new Date(+new Date(a.createDate)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'')}}</div>
         <p class="theme">{{a.theme}}</p>
-        <router-link :to="'/article/'+a.a_id">阅读更多 >></router-link>
+        <router-link :to="'/article/'+a.a_id" v-if="!isLogin">阅读更多 >></router-link>
+        <router-link  :to="'/edit/'+a.a_id" v-else>修改</router-link>
       </li>
     </ul>
     <div class="noArticle" v-if="!flag">
@@ -22,12 +24,16 @@ export default {
     return {
       flag: true,
       show: false,
+      isLogin: false,
       tag: '',
       articleList: []
     }
   },
   watch: {
     "$route": "getContent"
+  },
+  created() {
+      this.isLogin = this.$store.state.login.isLogin
   },
   beforeMount() {
       this.getContent()
@@ -48,7 +54,7 @@ export default {
         })
       }
       else {
-        this.$http.get('api/Tag/getTagArti' + new Date().getTime(),{ params:{c_id: c_id}})
+        this.$http.get('api/tag/getTagArti' + new Date().getTime(),{ params:{c_id: c_id}})
         .then((res) => {
           if(res.data.length>0){
             this.articleList = res.data
